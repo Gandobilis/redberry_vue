@@ -1,0 +1,15 @@
+<script setup>
+defineProps({
+  color: {
+    type: String,
+    default: '#021526'
+  }
+});
+</script>
+
+<template>
+  <svg width="12" height="11" viewBox="0 0 12 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M11 1.4082L4.125 9.59002L1 5.87101" :stroke="color" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round"/>
+  </svg>
+</template>

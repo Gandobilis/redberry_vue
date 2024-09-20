@@ -5,7 +5,7 @@ import FooterComponent from "../components/FooterComponent.vue";
 
 <template>
   <header-component/>
-  <main>
+  <main class="px-[162px] py-[38px]">
     <slot/>
   </main>
   <footer-component/>
