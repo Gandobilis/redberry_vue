@@ -11,27 +11,32 @@ export default function useAgent() {
         name: {
             valid: false,
             text: 'მინიმუმ ორი სიმბოლო',
-            color: '#021526'
+            color: '#021526',
+            border: '#808A93'
         },
         surname: {
             valid: false,
             text: 'მინიმუმ ორი სიმბოლო',
-            color: '#021526'
+            color: '#021526',
+            border: '#808A93'
         },
         email: {
             valid: false,
             text: 'გამოიყენეთ @redberry.ge ფოსტა',
-            color: '#021526'
+            color: '#021526',
+            border: '#808A93'
         },
         phone: {
             valid: false,
             text: 'მხოლოდ რიცხვები',
-            color: '#021526'
+            color: '#021526',
+            border: '#808A93'
         },
         avatar: {
             valid: true,
             text: '',
-            color: ''
+            color: '',
+            border: '#808A93'
         }
     });
 
@@ -40,14 +45,17 @@ export default function useAgent() {
             fields.value.name.valid = false;
             fields.value.name.text = 'მინიმუმ ორი სიმბოლო';
             fields.value.name.color = '#021526';
+            fields.value.name.border = '#808A93'
         } else if (newName.length < 2) {
             fields.value.name.valid = false;
             fields.value.name.text = 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.name.color = '#F93B1D';
+            fields.value.name.border = '#F93B1D'
         } else {
             fields.value.name.valid = true;
             fields.value.name.text = 'მინიმუმ ორი სიმბოლო';
             fields.value.name.color = '#45A849';
+            fields.value.name.border = '#808A93'
         }
     });
 
@@ -56,14 +64,17 @@ export default function useAgent() {
             fields.value.surname.valid = false;
             fields.value.surname.text = 'მინიმუმ ორი სიმბოლო';
             fields.value.surname.color = '#021526';
+            fields.value.surname.border = '#808A93'
         } else if (newSurname.length < 2) {
             fields.value.surname.valid = false;
             fields.value.surname.text = 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.surname.color = '#F93B1D';
+            fields.value.surname.border = '#F93B1D';
         } else {
             fields.value.surname.valid = true;
             fields.value.surname.text = 'მინიმუმ ორი სიმბოლო';
             fields.value.surname.color = '#45A849';
+            fields.value.surname.border = '#808A93'
         }
     });
 
@@ -73,14 +84,17 @@ export default function useAgent() {
             fields.value.email.valid = false;
             fields.value.email.text = 'გამოიყენეთ @redberry.ge ფოსტა';
             fields.value.email.color = '#021526';
+            fields.value.email.border = '#808A93'
         } else if (!emailPattern.test(newEmail)) {
             fields.value.email.valid = false;
             fields.value.email.text = 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.email.color = '#F93B1D';
+            fields.value.email.border = '#F93B1D'
         } else {
             fields.value.email.valid = true;
             fields.value.email.text = 'გამოიყენეთ @redberry.ge ფოსტა';
             fields.value.email.color = '#45A849';
+            fields.value.email.border = '#808A93'
         }
     });
 
@@ -90,14 +104,17 @@ export default function useAgent() {
             fields.value.phone.valid = false;
             fields.value.phone.text = 'მხოლოდ რიცხვები';
             fields.value.phone.color = '#021526';
+            fields.value.phone.border = '#808A93'
         } else if (!phonePattern.test(newPhone)) {
             fields.value.phone.valid = false;
             fields.value.phone.text = newPhone.length === 9 ? 'ფორმატი 5XXXXXXXX' : 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.phone.color = '#F93B1D';
+            fields.value.phone.border = '#F93B1D'
         } else {
             fields.value.phone.valid = true;
             fields.value.phone.text = 'მხოლოდ რიცხვები';
             fields.value.phone.color = '#45A849';
+            fields.value.phone.border = '#808A93'
         }
     });
 
@@ -111,6 +128,7 @@ export default function useAgent() {
         avatar.value = event.target.files[0];
         preview.value = URL.createObjectURL(avatar.value);
         fields.value.avatar.text = '';
+        fields.value.avatar.border = '#808A93';
     };
 
     const remove = () => {
@@ -125,6 +143,7 @@ export default function useAgent() {
         for (const key in fields.value) {
             if (!fields.value[key].valid) {
                 fields.value[key].color = '#F93B1D';
+                fields.value[key].border = '#F93B1D';
             }
         }
 
@@ -152,6 +171,7 @@ export default function useAgent() {
         } else {
             if (!avatar.value) {
                 fields.value.avatar.color = '#F93B1D';
+                fields.value.avatar.border = '#F93B1D';
                 fields.value.avatar.text = 'ფოტო აუცილებელია!';
             }
         }

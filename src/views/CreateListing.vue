@@ -102,7 +102,7 @@ onMounted(async () => {
 
       <div class="grid grid-cols-2 text-[#021526] gap-7">
         <div class="flex flex-col gap-y-1.5">
-          <span class="font-medium text-sm">ფასი</span>
+          <span class="font-medium text-sm">ფასი *</span>
 
           <input type="text" v-model="price"
                  :style="{ borderColor: !fields.price.valid ? fields.price.color : '#021526' }"
@@ -116,7 +116,7 @@ onMounted(async () => {
         </div>
 
         <div class="flex flex-col gap-y-1.5">
-          <span class="font-medium text-sm">ფართობი</span>
+          <span class="font-medium text-sm">ფართობი *</span>
 
           <input type="text" v-model="area"
                  :style="{ borderColor: !fields.postalIndex.valid ? fields.area.color : '#021526' }"

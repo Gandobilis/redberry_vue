@@ -23,14 +23,14 @@ const close = () => emit('close')
 
 <template>
   <div class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
-    <div class="bg-white p-16 rounded-[10px] shadow-lg w-2/5">
-      <p class="font-medium text-2xl text-center text-[#021526] pb-14">აგენტის დამატება</p>
+    <div class="bg-white p-16 rounded-[10px] shadow-lg w-1/2">
+      <p class="font-medium text-2xl text-center text-[#021526] pb-16">აგენტის დამატება</p>
 
       <div class="grid grid-cols-2 grid-rows-2 text-[#021526] gap-7">
         <div class="flex flex-col gap-y-1.5">
           <span class="font-medium text-sm">სახელი *</span>
 
-          <input type="text" v-model="name" :style="{ borderColor: !fields.name.valid ? fields.name.color : '#021526' }"
+          <input type="text" v-model="name" :style="{ borderColor: fields.name.border }"
                  class="rounded-md border p-2 focus:outline-0"/>
 
           <div class="flex items-center gap-x-1">
@@ -44,7 +44,7 @@ const close = () => emit('close')
           <span class="font-medium text-sm">გვარი *</span>
 
           <input type="text" v-model="surname"
-                 :style="{ borderColor: !fields.surname.valid ? fields.surname.color : '#021526' }"
+                 :style="{ borderColor: fields.surname.border }"
                  class="rounded-md border p-2 focus:outline-0"/>
 
           <div class="flex items-center gap-x-1">
@@ -58,7 +58,7 @@ const close = () => emit('close')
           <span class="font-medium text-sm">ელ-ფოსტა *</span>
 
           <input type="text" v-model="email"
-                 :style="{ borderColor: !fields.email.valid ? fields.email.color : '#021526' }"
+                 :style="{ borderColor: fields.email.border }"
                  class="rounded-md border p-2 focus:outline-0"/>
 
           <div class="flex items-center gap-x-1">
@@ -72,7 +72,7 @@ const close = () => emit('close')
           <span class="font-medium text-sm">ტელეფონის ნომერი *</span>
 
           <input type="text" v-model="phone"
-                 :style="{ borderColor: !fields.phone.valid ? fields.phone.color : '#021526' }"
+                 :style="{ borderColor: fields.phone.border }"
                  class="rounded-md border p-2 focus:outline-0"/>
 
           <div class="flex items-center gap-x-1">
@@ -87,7 +87,8 @@ const close = () => emit('close')
         <span class="font-medium text-sm">ატვირთეთ ფოტო *</span>
 
         <div
-            class="w-full h-[120px] rounded-md border border-dashed border-[#808A93] flex items-center justify-center">
+            :style="{borderColor: fields.avatar.border}"
+            class="w-full h-[120px] rounded-md border border-dashed flex items-center justify-center">
           <img v-if="!preview"
                src="/src/assets/icons/plus.svg"
                @click="trigger" alt="plus icon" class="cursor-pointer"/>
@@ -104,7 +105,7 @@ const close = () => emit('close')
 
       <span class="text-white text-sm mt-1"/>
 
-      <div class="flex items-center gap-4 pt-14 justify-end">
+      <div class="flex items-center gap-4 pt-16 justify-end">
         <button @click="close"
                 class="flex items-center gap-1 rounded-lg px-4 py-2.5 border text-[#F93B1D] border-[#F93B1D] font-medium hover:bg-[#F93B1D] hover:text-white">
           გაუქმება
