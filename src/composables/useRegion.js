@@ -17,9 +17,9 @@ export const useRegion = () => {
             console.log(error)
         }
     }
-    watch(region, () => {
-        filteredCities.value = cities.value.filter(c => c.redion_id = region.value.id)
-    }, {deep: true})
+    watch(region, (newRegion) => {
+        filteredCities.value = cities.value.filter(c => c.region_id === newRegion.id)
+    })
 
     return {
         regions,

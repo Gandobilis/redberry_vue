@@ -1,7 +1,7 @@
 <script setup>
 import Mark from "../assets/Mark.vue";
 import useListing from "../composables/useListing.js";
-import {onMounted} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {useRegion} from "../composables/useRegion.js";
 import DropDown from "../components/DropDown.vue";
 
@@ -16,27 +16,43 @@ const {
 const {
   isRental,
   address,
-  postalIndex,
+  zipCode,
+  regionId,
+  cityId,
   price,
   area,
   bedrooms,
   description,
+  picture,
+  agentId,
   fields,
-  image,
+  agents,
   file,
   preview,
-  agents,
-  getAgents,
   trigger,
   upload,
   remove,
   create,
-  agent
+  getAgents,
 } = useListing()
 
 onMounted(async () => {
   await getAgents();
   await getRegionsAndCities()
+})
+
+const agent = ref('აირჩიეთ აგენტი')
+
+watch(region, (newRegion) => {
+  regionId.value = newRegion.id
+})
+
+watch(city, (newCity) => {
+  cityId.value = newCity.id
+})
+
+watch(agent, (newAgent) => {
+  agentId.value = newAgent.id
 })
 </script>
 
@@ -65,7 +81,7 @@ onMounted(async () => {
           <span class="font-medium text-sm">მისამართი *</span>
 
           <input type="text" v-model="address"
-                 :style="{ borderColor: !fields.address.valid ? fields.address.color : '#021526' }"
+                 :style="{ borderColor: fields.address.border }"
                  class="rounded-md border p-2 focus:outline-0"/>
 
           <div class="flex items-center gap-x-1">
@@ -78,22 +94,24 @@ onMounted(async () => {
         <div class="flex flex-col gap-y-1.5">
           <span class="font-medium text-sm">საფოსტო ინდექსი *</span>
 
-          <input type="text" v-model="postalIndex"
-                 :style="{ borderColor: !fields.postalIndex.valid ? fields.postalIndex.color : '#021526' }"
+          <input type="text" v-model="zipCode"
+                 :style="{ borderColor: fields.zipCode.border }"
                  class="rounded-md border p-2 focus:outline-0"/>
 
           <div class="flex items-center gap-x-1">
-            <Mark :color="fields.postalIndex.color"/>
-            <span class="flex items-center gap-x-1 text-sm" :style="{color: fields.postalIndex.color}"
-                  v-text="fields.postalIndex.text"/>
+            <Mark :color="fields.zipCode.color"/>
+            <span class="flex items-center gap-x-1 text-sm" :style="{color: fields.zipCode.color}"
+                  v-text="fields.zipCode.text"/>
           </div>
         </div>
       </div>
 
       <div class="grid grid-cols-2 text-[#021526] gap-7">
-        <drop-down :options="regions" title="რეგიონი" v-model="region"/>
+        <drop-down :options="regions" title="რეგიონი" v-model="region" :border="fields.regionId.border"
+                   :color="fields.regionId.color"/>
 
-        <drop-down :options="filteredCities" title="ქალაქი" v-model="city"/>
+        <drop-down :options="filteredCities" title="ქალაქი" v-model="city" :border="fields.cityId.border"
+                   :color="fields.cityId.color"/>
       </div>
     </div>
 
@@ -105,7 +123,7 @@ onMounted(async () => {
           <span class="font-medium text-sm">ფასი *</span>
 
           <input type="text" v-model="price"
-                 :style="{ borderColor: !fields.price.valid ? fields.price.color : '#021526' }"
+                 :style="{ borderColor: fields.price.border }"
                  class="rounded-md border p-2 focus:outline-0"/>
 
           <div class="flex items-center gap-x-1">
@@ -119,7 +137,7 @@ onMounted(async () => {
           <span class="font-medium text-sm">ფართობი *</span>
 
           <input type="text" v-model="area"
-                 :style="{ borderColor: !fields.postalIndex.valid ? fields.area.color : '#021526' }"
+                 :style="{ borderColor: fields.area.border }"
                  class="rounded-md border p-2 focus:outline-0"/>
 
           <div class="flex items-center gap-x-1">
@@ -135,7 +153,7 @@ onMounted(async () => {
           <span class="font-medium text-sm">საძინებლების რაოდენობა *</span>
 
           <input type="text" v-model="bedrooms"
-                 :style="{ borderColor: !fields.address.valid ? fields.bedrooms.color : '#021526' }"
+                 :style="{ borderColor: fields.bedrooms.border }"
                  class="rounded-md border p-2 focus:outline-0"/>
 
           <div class="flex items-center gap-x-1">
@@ -151,7 +169,7 @@ onMounted(async () => {
           <span class="font-medium text-sm">აღწერა *</span>
 
           <textarea type="text" v-model="description"
-                    :style="{ borderColor: !fields.address.valid ? fields.description.color : '#021526' }"
+                    :style="{ borderColor: fields.description.border }"
                     class="rounded-md border p-2 focus:outline-0 resize-none h-32"/>
 
           <div class="flex items-center gap-x-1">
@@ -166,6 +184,7 @@ onMounted(async () => {
         <span class="font-medium text-sm">ატვირთეთ ფოტო *</span>
 
         <div
+            :style="{borderColor: fields.picture.border}"
             class="w-full h-[120px] rounded-md border border-dashed flex items-center justify-center">
           <img v-if="!preview"
                src="/src/assets/icons/plus.svg"
@@ -176,12 +195,13 @@ onMounted(async () => {
                  class="absolute -right-2 -bottom-2 cursor-pointer"/>
           </div>
         </div>
-        <span class="text-sm" v-if="fields.image.text" v-text="fields.image.text"
-              :style="{ color: fields.image.color }"/>
+        <span class="text-sm" v-if="fields.picture.text" v-text="fields.picture.text"
+              :style="{ color: fields.picture.color }"/>
         <input @change="upload" type="file" class="hidden" ref="file"/>
       </div>
 
-      <drop-down class="w-2/5" :options="agents" title="აგენტი" v-model="agent"/>
+      <drop-down class="w-2/5" :options="agents" title="აგენტი" v-model="agent" :border="fields.agentId.border"
+                 :color="fields.agentId.color"/>
 
       <div class="flex items-center gap-4 pt-14 justify-end">
         <button @click="close"

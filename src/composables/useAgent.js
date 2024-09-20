@@ -6,6 +6,7 @@ export default function useAgent() {
     const surname = ref();
     const email = ref();
     const phone = ref();
+    const avatar = ref();
 
     const fields = ref({
         name: {
@@ -118,7 +119,6 @@ export default function useAgent() {
         }
     });
 
-    const avatar = ref();
     const file = ref(null);
     const preview = ref();
 
