@@ -1,11 +1,11 @@
 const routes = [
     {
         path: "/",
-        component: () => import("/src/Views/HomeView.vue"),
+        component: () => import("/src/views/HomeView.vue"),
     },
     {
         path: "/create-listing",
-        component: () => import("/src/Views/CreateListing.vue"),
+        component: () => import("/src/views/CreateListing.vue"),
     },
 ];
 
