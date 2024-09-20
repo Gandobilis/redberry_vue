@@ -41,7 +41,7 @@ const close = () => emit('close')
         </div>
 
         <div class="flex flex-col gap-y-1.5">
-          <span class="font-medium text-sm">გვარი</span>
+          <span class="font-medium text-sm">გვარი *</span>
 
           <input type="text" v-model="surname"
                  :style="{ borderColor: !fields.surname.valid ? fields.surname.color : '#021526' }"
@@ -69,7 +69,7 @@ const close = () => emit('close')
         </div>
 
         <div class="flex flex-col gap-y-1.5">
-          <span class="font-medium text-sm">ტელეფონის ნომერი</span>
+          <span class="font-medium text-sm">ტელეფონის ნომერი *</span>
 
           <input type="text" v-model="phone"
                  :style="{ borderColor: !fields.phone.valid ? fields.phone.color : '#021526' }"

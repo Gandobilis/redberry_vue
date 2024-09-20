@@ -25,10 +25,11 @@ export default function useAgent() {
         },
         phone: {
             valid: false,
-            text: 'შეიყვანეთ 9-ნიშნიანი ტელეფონი',
+            text: 'მხოლოდ რიცხვები',
             color: '#021526'
         },
         avatar: {
+            valid: true,
             text: '',
             color: ''
         }
@@ -52,7 +53,7 @@ export default function useAgent() {
 
     watch(surname, (newSurname) => {
         if (newSurname.length === 0) {
-            fields.value.surname.valid = true;
+            fields.value.surname.valid = false;
             fields.value.surname.text = 'მინიმუმ ორი სიმბოლო';
             fields.value.surname.color = '#021526';
         } else if (newSurname.length < 2) {
@@ -69,7 +70,7 @@ export default function useAgent() {
     watch(email, (newEmail) => {
         const emailPattern = /^\S+@redberry\.ge$/;
         if (newEmail.length === 0) {
-            fields.value.email.valid = true;
+            fields.value.email.valid = false;
             fields.value.email.text = 'გამოიყენეთ @redberry.ge ფოსტა';
             fields.value.email.color = '#021526';
         } else if (!emailPattern.test(newEmail)) {
@@ -84,14 +85,14 @@ export default function useAgent() {
     });
 
     watch(phone, (newPhone) => {
-        const phonePattern = /^\d{9}$/;
+        const phonePattern = /^5\d{8}$/;
         if (newPhone.length === 0) {
             fields.value.phone.valid = false;
             fields.value.phone.text = 'მხოლოდ რიცხვები';
             fields.value.phone.color = '#021526';
         } else if (!phonePattern.test(newPhone)) {
             fields.value.phone.valid = false;
-            fields.value.phone.text = 'ჩაწერეთ ვალიდური მონაცემები';
+            fields.value.phone.text = newPhone.length === 9 ? 'ფორმატი 5XXXXXXXX' : 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.phone.color = '#F93B1D';
         } else {
             fields.value.phone.valid = true;
@@ -109,6 +110,7 @@ export default function useAgent() {
     const upload = (event) => {
         avatar.value = event.target.files[0];
         preview.value = URL.createObjectURL(avatar.value);
+        fields.value.avatar.text = '';
     };
 
     const remove = () => {
@@ -117,11 +119,11 @@ export default function useAgent() {
         avatar.value = undefined;
     };
 
-    const validate = () => Object.keys(fields.value).some((key) => !fields.value[key].valid)
+    const validate = () => Object.keys(fields.value).every((key) => fields.value[key].valid)
 
     const create = async () => {
         for (const key in fields.value) {
-            if (!fields.value[key].valid && (key === 'name' || key === 'email')) {
+            if (!fields.value[key].valid) {
                 fields.value[key].color = '#F93B1D';
             }
         }
@@ -148,8 +150,10 @@ export default function useAgent() {
                 fields.value.avatar.text = 'სერვერზე წარმოიშვა შეცდომა!';
             }
         } else {
-            fields.value.avatar.color = '#F93B1D';
-            fields.value.avatar.text = 'ფოტო აუცილებელია!';
+            if (!avatar.value) {
+                fields.value.avatar.color = '#F93B1D';
+                fields.value.avatar.text = 'ფოტო აუცილებელია!';
+            }
         }
     };
 
