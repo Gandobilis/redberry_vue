@@ -15,7 +15,7 @@ const model = defineModel()
 
 <template>
   <div class="flex flex-col gap-y-1.5 text-[#021526] text-sm">
-    <label for="dropdown" class="font-medium" v-text="title"/>
+    <label for="dropdown" class="font-medium" v-text="`${title} *`"/>
 
     <div class="relative">
       <select id="dropdown" v-model="model"
