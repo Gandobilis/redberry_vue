@@ -1,9 +1,9 @@
 <script setup>
-import Mark from "../assets/Mark.vue";
-import useListing from "../composables/useListing.js";
+import Mark from "/src/assets/Mark.vue";
+import useListing from "/src/composables/useListing.js";
 import {onMounted, ref, watch} from "vue";
-import {useRegion} from "../composables/useRegion.js";
-import DropDown from "../components/DropDown.vue";
+import {useRegion} from "/src/composables/useRegion.js";
+import DropDown from "/src/components/DropDown.vue";
 
 const {
   regions,

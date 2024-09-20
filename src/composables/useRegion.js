@@ -1,4 +1,4 @@
-import axios from "../interceptors/axios/index.js";
+import axios from "/src/interceptors/axios/index.js";
 import {ref, watch} from "vue";
 
 export const useRegion = () => {
