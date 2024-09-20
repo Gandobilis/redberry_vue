@@ -15,10 +15,10 @@ const close = () => show.value = false
     </div>
 
     <div class="flex items-center gap-4">
-      <button
+      <router-link to="/create-listing"
           class="flex items-center gap-1 rounded-lg px-4 py-2.5 bg-[#F93B1D] border border-[#F93B1D] text-white font-medium hover:bg-[#DF3014]">
         <span class="text-xl">+</span> ლისტინგის დამატება
-      </button>
+      </router-link>
 
       <button @click="open"
               class="flex items-center gap-1 rounded-lg px-4 py-2.5 border text-[#F93B1D] border-[#F93B1D] font-medium hover:bg-[#F93B1D] hover:text-white">
