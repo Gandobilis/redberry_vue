@@ -77,44 +77,127 @@ export default function useListing() {
         }
     });
 
-    // Watcher for address
     watch(address, (newAddress) => {
-        if (newAddress.length === 0) {
+        if (newAddress.trim().length === 0) {
             fields.value.address.valid = false;
             fields.value.address.text = 'მინიმუმ ორი სიმბოლო';
             fields.value.address.color = '#021526';
-        } else if (newAddress.length < 2) {
+            fields.value.address.border = '#808A93'
+        } else if (newAddress.trim().length < 2) {
             fields.value.address.valid = false;
             fields.value.address.text = 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.address.color = '#F93B1D';
+            fields.value.address.border = '#F93B1D'
         } else {
             fields.value.address.valid = true;
             fields.value.address.text = 'მინიმუმ ორი სიმბოლო';
             fields.value.address.color = '#45A849';
+            fields.value.address.border = '#808A93'
         }
     });
 
-// Watcher for zipCode
     watch(zipCode, (newZipCode) => {
         const zipCodePattern = /^\d+$/;
-        if (newZipCode.length === 0) {
+        if (newZipCode.trim().length === 0) {
             fields.value.zipCode.valid = false;
             fields.value.zipCode.text = 'მხოლოდ რიცხვები';
             fields.value.zipCode.color = '#021526';
-        } else if (!zipCodePattern.test(newZipCode)) {
+            fields.value.zipCode.border = '#808A93'
+        } else if (!zipCodePattern.test(newZipCode.trim())) {
             fields.value.zipCode.valid = false;
             fields.value.zipCode.text = 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.zipCode.color = '#F93B1D';
+            fields.value.zipCode.border = '#F93B1D'
         } else {
             fields.value.zipCode.valid = true;
             fields.value.zipCode.text = 'მხოლოდ რიცხვები';
-            fields.value.zipCode.color = '#45A849';
+            fields.value.zipCode.color = '#45A849'
+            fields.value.zipCode.border = '#808A93'
         }
     });
 
-// Watcher for regionId
+    watch(price, (newPrice) => {
+        const pricePattern = /^\d+$/;
+        if (newPrice.trim().length === 0) {
+            fields.value.price.valid = false;
+            fields.value.price.text = 'მხოლოდ რიცხვები';
+            fields.value.price.color = '#021526';
+            fields.value.price.border = '#808A93'
+        } else if (!pricePattern.test(newPrice.trim())) {
+            fields.value.price.valid = false;
+            fields.value.price.text = 'ჩაწერეთ ვალიდური მონაცემები';
+            fields.value.price.color = '#F93B1D';
+            fields.value.price.border = '#F93B1D'
+        } else {
+            fields.value.price.valid = true;
+            fields.value.price.text = 'მხოლოდ რიცხვები';
+            fields.value.price.color = '#45A849';
+            fields.value.price.border = '#808A93'
+        }
+    });
+
+    watch(area, (newArea) => {
+        const areaPattern = /^\d+$/;
+        if (newArea.trim().length === 0) {
+            fields.value.area.valid = false;
+            fields.value.area.text = 'მხოლოდ რიცხვები';
+            fields.value.area.color = '#021526';
+            fields.value.area.border = '#808A93'
+        } else if (!areaPattern.test(newArea.trim())) {
+            fields.value.area.valid = false;
+            fields.value.area.text = 'ჩაწერეთ ვალიდური მონაცემები';
+            fields.value.area.color = '#F93B1D';
+            fields.value.area.border = '#F93B1D'
+        } else {
+            fields.value.area.valid = true;
+            fields.value.area.text = 'მხოლოდ რიცხვები';
+            fields.value.area.color = '#45A849';
+            fields.value.area.border = '#808A93'
+        }
+    });
+
+    watch(bedrooms, (newBedrooms) => {
+        const bedroomsPattern = /^\d+$/;
+        if (newBedrooms.trim().length === 0) {
+            fields.value.bedrooms.valid = false;
+            fields.value.bedrooms.text = 'მხოლოდ რიცხვები';
+            fields.value.bedrooms.color = '#021526';
+            fields.value.bedrooms.border = '#808A93'
+        } else if (!bedroomsPattern.test(newBedrooms.trim())) {
+            fields.value.bedrooms.valid = false;
+            fields.value.bedrooms.text = 'ჩაწერეთ ვალიდური მონაცემები';
+            fields.value.bedrooms.color = '#F93B1D';
+            fields.value.bedrooms.border = '#F93B1D'
+        } else {
+            fields.value.bedrooms.valid = true;
+            fields.value.bedrooms.text = 'მხოლოდ რიცხვები';
+            fields.value.bedrooms.color = '#45A849';
+            fields.value.bedrooms.border = '#808A93'
+        }
+    });
+
+    watch(description, (newDescription) => {
+        const descriptionPattern = /^([\u10A0-\u10FF]+\s+){4,}[\u10A0-\u10FF]+$/;
+        if (newDescription.trim().length === 0) {
+            fields.value.description.valid = false;
+            fields.value.description.text = 'მინიმუმ ხუთი სიტყვა';
+            fields.value.description.color = '#021526';
+            fields.value.description.border = '#808A93'
+        } else if (!descriptionPattern.test(newDescription.trim())) {
+            fields.value.description.valid = false;
+            fields.value.description.text = 'ჩაწერეთ ვალიდური მონაცემები';
+            fields.value.description.color = '#F93B1D';
+            fields.value.description.border = '#F93B1D'
+        } else {
+            fields.value.description.valid = true;
+            fields.value.description.text = 'მინიმუმ ხუთი სიტყვა';
+            fields.value.description.color = '#45A849';
+            fields.value.description.border = '#808A93'
+        }
+    });
+
     watch(regionId, (newRegionId) => {
-        if (!regionId) {
+        if (!newRegionId) {
             fields.value.regionId.valid = false;
             fields.value.regionId.text = 'აირჩიეთ რეგიონი';
             fields.value.regionId.border = '#F93B1D'
@@ -125,7 +208,6 @@ export default function useListing() {
         }
     });
 
-// Watcher for cityId
     watch(cityId, (newCityId) => {
         if (!newCityId) {
             fields.value.cityId.valid = false;
@@ -138,81 +220,8 @@ export default function useListing() {
         }
     });
 
-// Watcher for price
-    watch(price, (newPrice) => {
-        const pricePattern = /^\d+$/;
-        if (newPrice.length === 0) {
-            fields.value.price.valid = false;
-            fields.value.price.text = 'მხოლოდ რიცხვები';
-            fields.value.price.color = '#021526';
-        } else if (!pricePattern.test(newPrice)) {
-            fields.value.price.valid = false;
-            fields.value.price.text = 'ჩაწერეთ ვალიდური მონაცემები';
-            fields.value.price.color = '#F93B1D';
-        } else {
-            fields.value.price.valid = true;
-            fields.value.price.text = 'მხოლოდ რიცხვები';
-            fields.value.price.color = '#45A849';
-        }
-    });
-
-// Watcher for area
-    watch(area, (newArea) => {
-        const areaPattern = /^\d+$/;
-        if (newArea.length === 0) {
-            fields.value.area.valid = false;
-            fields.value.area.text = 'მხოლოდ რიცხვები';
-            fields.value.area.color = '#021526';
-        } else if (!areaPattern.test(newArea)) {
-            fields.value.area.valid = false;
-            fields.value.area.text = 'ჩაწერეთ ვალიდური მონაცემები';
-            fields.value.area.color = '#F93B1D';
-        } else {
-            fields.value.area.valid = true;
-            fields.value.area.text = 'მხოლოდ რიცხვები';
-            fields.value.area.color = '#45A849';
-        }
-    });
-
-// Watcher for bedrooms
-    watch(bedrooms, (newBedrooms) => {
-        const bedroomsPattern = /^\d+$/;
-        if (newBedrooms.length === 0) {
-            fields.value.bedrooms.valid = false;
-            fields.value.bedrooms.text = 'მხოლოდ რიცხვები';
-            fields.value.bedrooms.color = '#021526';
-        } else if (!bedroomsPattern.test(newBedrooms)) {
-            fields.value.bedrooms.valid = false;
-            fields.value.bedrooms.text = 'ჩაწერეთ ვალიდური მონაცემები';
-            fields.value.bedrooms.color = '#F93B1D';
-        } else {
-            fields.value.bedrooms.valid = true;
-            fields.value.bedrooms.text = 'მხოლოდ რიცხვები';
-            fields.value.bedrooms.color = '#45A849';
-        }
-    });
-
-// Watcher for description
-    watch(description, (newDescription) => {
-        const descriptionPattern = /^([\u10A0-\u10FF]+\s+){4,}[\u10A0-\u10FF]+$/;
-        if (newDescription.length === 0) {
-            fields.value.description.valid = false;
-            fields.value.description.text = 'მინიმუმ ხუთი სიტყვა';
-            fields.value.description.color = '#021526';
-        } else if (!descriptionPattern.test(newDescription)) {
-            fields.value.description.valid = false;
-            fields.value.description.text = 'ჩაწერეთ ვალიდური მონაცემები';
-            fields.value.description.color = '#F93B1D';
-        } else {
-            fields.value.description.valid = true;
-            fields.value.description.text = 'მინიმუმ ხუთი სიტყვა';
-            fields.value.description.color = '#45A849';
-        }
-    });
-
-// Watcher for agent_id
     watch(agentId, (newAgentId) => {
-        if (!agentId) {
+        if (!newAgentId) {
             fields.value.agentId.valid = false;
             fields.value.agentId.text = 'აირჩიეთ აგენტი';
             fields.value.regionId.border = '#F93B1D'
@@ -255,14 +264,14 @@ export default function useListing() {
             try {
                 const data = new FormData();
                 data.append('is_rental', isRental.value);
-                data.append('address', address.value);
-                data.append('zip_code', zipCode.value);
+                data.append('address', address.value.trim());
+                data.append('zip_code', zipCode.value.trim());
                 data.append('region_id', regionId.value);
                 data.append('city_id', cityId.value);
-                data.append('price', price.value);
-                data.append('area', area.value);
-                data.append('bedrooms', bedrooms.value);
-                data.append('description', description.value);
+                data.append('price', price.value.trim());
+                data.append('area', area.value.trim());
+                data.append('bedrooms', bedrooms.value.trim());
+                data.append('description', description.value.trim());
                 data.append('image', picture.value);
                 data.append('agent_id', agentId.value);
 
