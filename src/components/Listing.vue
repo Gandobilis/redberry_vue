@@ -1,7 +1,7 @@
 <script setup>
 import Carousel from "./Carousel.vue";
 import {inject, onMounted, ref, watch} from "vue";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
 import Left from "../assets/icons/svg/left.vue";
 import {useListings} from "../composables/useListings.js";
 import Location from "../assets/icons/svg/location.vue";
@@ -13,6 +13,7 @@ import X from "../assets/icons/svg/x.vue";
 const {listing, getListing, deleteListing} = useListings()
 
 const route = useRoute()
+const router = useRouter()
 const listings = inject('listings')
 const getListings = inject('getListings')
 
@@ -32,6 +33,10 @@ onMounted(async () => {
 })
 
 const show = ref(false)
+const _deleteListing = async () => {
+  await deleteListing(listing.value.id)
+  await router.push('/')
+}
 </script>
 
 <template>
@@ -117,7 +122,7 @@ const show = ref(false)
             გაუქმება
           </button>
 
-          <button @click="deleteListing(listing.id); show = false"
+          <button @click="_deleteListing"
                   class="flex items-center gap-1 rounded-lg px-4 py-2.5 bg-[#F93B1D] border border-[#F93B1D] text-white font-medium hover:bg-[#DF3014]">
             დადასტურება
           </button>
