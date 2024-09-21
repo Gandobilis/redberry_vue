@@ -42,12 +42,12 @@ export default function useAgent() {
     });
 
     watch(name, (newName) => {
-        if (newName.length === 0) {
+        if (newName.trim().length === 0) {
             fields.value.name.valid = false;
             fields.value.name.text = 'მინიმუმ ორი სიმბოლო';
             fields.value.name.color = '#021526';
             fields.value.name.border = '#808A93'
-        } else if (newName.length < 2) {
+        } else if (newName.trim().length < 2) {
             fields.value.name.valid = false;
             fields.value.name.text = 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.name.color = '#F93B1D';
@@ -61,12 +61,12 @@ export default function useAgent() {
     });
 
     watch(surname, (newSurname) => {
-        if (newSurname.length === 0) {
+        if (newSurname.trim().length === 0) {
             fields.value.surname.valid = false;
             fields.value.surname.text = 'მინიმუმ ორი სიმბოლო';
             fields.value.surname.color = '#021526';
             fields.value.surname.border = '#808A93'
-        } else if (newSurname.length < 2) {
+        } else if (newSurname.trim().length < 2) {
             fields.value.surname.valid = false;
             fields.value.surname.text = 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.surname.color = '#F93B1D';
@@ -81,12 +81,12 @@ export default function useAgent() {
 
     watch(email, (newEmail) => {
         const emailPattern = /^\S+@redberry\.ge$/;
-        if (newEmail.length === 0) {
+        if (newEmail.trim().length === 0) {
             fields.value.email.valid = false;
             fields.value.email.text = 'გამოიყენეთ @redberry.ge ფოსტა';
             fields.value.email.color = '#021526';
             fields.value.email.border = '#808A93'
-        } else if (!emailPattern.test(newEmail)) {
+        } else if (!emailPattern.test(newEmail.trim())) {
             fields.value.email.valid = false;
             fields.value.email.text = 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.email.color = '#F93B1D';
@@ -101,12 +101,12 @@ export default function useAgent() {
 
     watch(phone, (newPhone) => {
         const phonePattern = /^5\d{8}$/;
-        if (newPhone.length === 0) {
+        if (newPhone.trim().length === 0) {
             fields.value.phone.valid = false;
             fields.value.phone.text = 'მხოლოდ რიცხვები';
             fields.value.phone.color = '#021526';
             fields.value.phone.border = '#808A93'
-        } else if (!phonePattern.test(newPhone)) {
+        } else if (!phonePattern.test(newPhone.trim())) {
             fields.value.phone.valid = false;
             fields.value.phone.text = newPhone.length === 9 ? 'ფორმატი 5XXXXXXXX' : 'ჩაწერეთ ვალიდური მონაცემები';
             fields.value.phone.color = '#F93B1D';
@@ -150,10 +150,10 @@ export default function useAgent() {
         if (avatar.value && validate()) {
             try {
                 const data = new FormData();
-                data.append('name', name.value);
-                data.append('surname', surname.value);
-                data.append('email', email.value);
-                data.append('phone', phone.value);
+                data.append('name', name.value.trim());
+                data.append('surname', surname.value.trim());
+                data.append('email', email.value.trim());
+                data.append('phone', phone.value.trim());
                 data.append('avatar', avatar.value);
 
                 await axios.post('agents', data, {
