@@ -8,6 +8,7 @@ import Location from "../assets/icons/svg/location.vue";
 import Area from "../assets/icons/svg/area.vue";
 import Bed from "../assets/icons/svg/bed.vue";
 import Zip from "../assets/icons/svg/zip.vue";
+import X from "../assets/icons/svg/x.vue";
 
 const {listing, getListing} = useListings()
 
@@ -29,6 +30,8 @@ onMounted(async () => {
   await getListing(route.params.id);
   regionListings.value = listings.value.filter(l => l.city.region_id === listing.value.city.region_id)
 })
+
+const show = ref(false)
 </script>
 
 <template>
@@ -94,11 +97,34 @@ onMounted(async () => {
         </div>
       </div>
 
-      <button class="font-medium text-[#676E76] text-[12px] rounded-[8px] border border-[#676E76] p-2.5 w-fit">
+      <button @click="show = true"
+              class="font-medium text-[#676E76] text-[12px] rounded-[8px] border border-[#676E76] p-2.5 w-fit">
         ლისტინგის წაშლა
       </button>
     </div>
   </div>
 
   <carousel v-if="regionListings.length !==0" :listings="regionListings"/>
+
+  <div class="fixed inset-0 bg-[#02152657] backdrop-blur-md flex items-center justify-center z-50" v-if="show">
+    <div class="relative">
+      <div class="bg-white p-16 rounded-[20px] shadow-lg py-[58px] px-[170px] flex flex-col gap-y-10">
+        <p class="text-[20px] text-[#2D3648]">გსურთ წაშალოთ ლისტინგი?</p>
+
+        <div class="flex items-center gap-4 justify-center">
+          <button @click="show = false"
+                  class="flex items-center gap-1 rounded-lg px-4 py-2.5 border text-[#F93B1D] border-[#F93B1D] font-medium hover:bg-[#F93B1D] hover:text-white">
+            გაუქმება
+          </button>
+
+          <button @click=""
+                  class="flex items-center gap-1 rounded-lg px-4 py-2.5 bg-[#F93B1D] border border-[#F93B1D] text-white font-medium hover:bg-[#DF3014]">
+            დადასტურება
+          </button>
+        </div>
+      </div>
+
+      <x @click="show = false" class="absolute top-5 right-5 cursor-pointer"/>
+    </div>
+  </div>
 </template>
