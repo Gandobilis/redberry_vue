@@ -263,7 +263,7 @@ export default function useListing() {
         if (picture.value && validate()) {
             try {
                 const data = new FormData();
-                data.append('is_rental', isRental.value);
+                data.append('is_rental', String(isRental.value));
                 data.append('address', address.value.trim());
                 data.append('zip_code', zipCode.value.trim());
                 data.append('region_id', regionId.value);
