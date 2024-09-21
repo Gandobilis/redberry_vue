@@ -25,7 +25,7 @@ const close = () => emit('close')
 </script>
 
 <template>
-  <div class="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50">
+  <div class="fixed inset-0 bg-[#02152657] backdrop-blur-md flex items-center justify-center z-50">
     <div class="bg-white p-16 rounded-[10px] shadow-lg w-1/2">
       <p class="font-medium text-2xl text-center text-[#021526] pb-16">აგენტის დამატება</p>
 

@@ -7,6 +7,10 @@ const routes = [
         path: "/create-listing",
         component: () => import("/src/views/CreateListing.vue"),
     },
+    {
+        path: "/listings/:id",
+        component: () => import("/src/components/Listing.vue"),
+    },
 ];
 
 export default routes;

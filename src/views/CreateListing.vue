@@ -201,10 +201,10 @@ watch(agent, (newAgent) => {
       <drop-down class="w-2/5" :options="agents" title="აგენტი" v-model="agent" :border="fields.agentId.border"/>
 
       <div class="flex items-center gap-4 pt-14 justify-end">
-        <button @click="close"
+        <router-link to="/"
                 class="flex items-center gap-1 rounded-lg px-4 py-2.5 border text-[#F93B1D] border-[#F93B1D] font-medium hover:bg-[#F93B1D] hover:text-white">
           გაუქმება
-        </button>
+        </router-link>
 
         <button @click="create"
                 class="flex items-center gap-1 rounded-lg px-4 py-2.5 bg-[#F93B1D] border border-[#F93B1D] text-white font-medium hover:bg-[#DF3014]">

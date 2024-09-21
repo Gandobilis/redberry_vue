@@ -26,7 +26,9 @@ const model = defineModel()
               :style="{'borderColor': border}"
               class="cursor-pointer w-full appearance-none bg-white border p-2.5 rounded-md focus:outline-none">
         <option disabled selected v-text="`აირჩიეთ ${title}`"/>
-        <option v-for="(option, index) in options" :key="index" :value="option" v-text="option.name"/>
+        <option v-for="(option, index) in options" :key="index" :value="option">
+          {{ option.name }}{{ option.surname ? ` ${option.surname}` : '' }}
+        </option>
       </select>
 
       <span></span>
