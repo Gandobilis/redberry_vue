@@ -1,5 +1,6 @@
 import axios from "../interceptors/axios/index.js";
 import {ref, provide} from "vue";
+import {useRouter} from "vue-router";
 
 export const useListings = () => {
     const listings = ref()
@@ -26,9 +27,20 @@ export const useListings = () => {
         }
     }
 
+    const deleteListing = async (id) => {
+        try {
+            await axios.delete(`real-estates/${id}`)
+            const router = useRouter()
+            await router.push('/')
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return {
         listing,
         getListings,
-        getListing
+        getListing,
+        deleteListing
     }
 }

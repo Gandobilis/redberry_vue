@@ -10,7 +10,7 @@ import Bed from "../assets/icons/svg/bed.vue";
 import Zip from "../assets/icons/svg/zip.vue";
 import X from "../assets/icons/svg/x.vue";
 
-const {listing, getListing} = useListings()
+const {listing, getListing, deleteListing} = useListings()
 
 const route = useRoute()
 const listings = inject('listings')
@@ -117,7 +117,7 @@ const show = ref(false)
             გაუქმება
           </button>
 
-          <button @click=""
+          <button @click="deleteListing(listing.id); show = false"
                   class="flex items-center gap-1 rounded-lg px-4 py-2.5 bg-[#F93B1D] border border-[#F93B1D] text-white font-medium hover:bg-[#DF3014]">
             დადასტურება
           </button>
