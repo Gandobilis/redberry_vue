@@ -68,7 +68,7 @@ watch(agent, (newAgent) => {
         </label>
 
         <label class="flex items-center gap-x-1 text-sm">
-          <input type="radio" name="sale-type" v-model="isRental" value="1"> ქურავდება
+          <input type="radio" name="sale-type" v-model="isRental" value="1"> ქირავდება
         </label>
       </div>
     </div>
