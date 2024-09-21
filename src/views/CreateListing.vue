@@ -23,7 +23,6 @@ const {
   area,
   bedrooms,
   description,
-  picture,
   agentId,
   fields,
   agents,
@@ -44,6 +43,7 @@ onMounted(async () => {
 const agent = ref('აირჩიეთ აგენტი')
 
 watch(region, (newRegion) => {
+  city.value = 'აირჩიეთ ქალაქი'
   regionId.value = newRegion.id
 })
 
@@ -107,11 +107,9 @@ watch(agent, (newAgent) => {
       </div>
 
       <div class="grid grid-cols-2 text-[#021526] gap-7">
-        <drop-down :options="regions" title="რეგიონი" v-model="region" :border="fields.regionId.border"
-                   :color="fields.regionId.color"/>
+        <drop-down :options="regions" title="რეგიონი" v-model="region" :border="fields.regionId.border"/>
 
-        <drop-down :options="filteredCities" title="ქალაქი" v-model="city" :border="fields.cityId.border"
-                   :color="fields.cityId.color"/>
+        <drop-down :options="filteredCities" title="ქალაქი" v-model="city" :border="fields.cityId.border"/>
       </div>
     </div>
 
@@ -200,8 +198,7 @@ watch(agent, (newAgent) => {
         <input @change="upload" type="file" class="hidden" ref="file"/>
       </div>
 
-      <drop-down class="w-2/5" :options="agents" title="აგენტი" v-model="agent" :border="fields.agentId.border"
-                 :color="fields.agentId.color"/>
+      <drop-down class="w-2/5" :options="agents" title="აგენტი" v-model="agent" :border="fields.agentId.border"/>
 
       <div class="flex items-center gap-4 pt-14 justify-end">
         <button @click="close"

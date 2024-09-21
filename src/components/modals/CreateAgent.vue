@@ -17,6 +17,9 @@ const {
   create
 } = useAgent()
 
+const _create = async () => {
+  if (await create()) close();
+}
 const emit = defineEmits(['close'])
 const close = () => emit('close')
 </script>
@@ -111,7 +114,7 @@ const close = () => emit('close')
           გაუქმება
         </button>
 
-        <button @click="create"
+        <button @click="_create"
                 class="flex items-center gap-1 rounded-lg px-4 py-2.5 bg-[#F93B1D] border border-[#F93B1D] text-white font-medium hover:bg-[#DF3014]">
           დაამატე აგენტი
         </button>

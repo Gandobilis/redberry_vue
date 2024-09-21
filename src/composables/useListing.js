@@ -1,7 +1,9 @@
 import {ref, watch} from 'vue';
 import axios from "/src/interceptors/axios";
+import {useRouter} from "vue-router";
 
 export default function useListing() {
+    const router = useRouter();
     const isRental = ref(0);
     const address = ref();
     const zipCode = ref();
@@ -16,11 +18,6 @@ export default function useListing() {
     const agents = ref([])
 
     const fields = ref({
-        isRental: {
-            valid: true,
-            color: '#021526',
-            border: '#808A93'
-        },
         address: {
             valid: false,
             text: 'მინიმუმ ორი სიმბოლო',
@@ -36,13 +33,11 @@ export default function useListing() {
         regionId: {
             valid: false,
             text: 'აირჩიეთ რეგიონი',
-            color: '#021526',
             border: '#808A93'
         },
         cityId: {
             valid: false,
             text: 'აირჩიეთ ქალაქი',
-            color: '#021526',
             border: '#808A93'
         },
         price: {
@@ -70,7 +65,7 @@ export default function useListing() {
             border: '#808A93'
         },
         picture: {
-            valid: false,
+            valid: true,
             text: '',
             color: '#021526',
             border: '#808A93'
@@ -78,7 +73,6 @@ export default function useListing() {
         agentId: {
             valid: false,
             text: 'აირჩიეთ აგენტი',
-            color: '#021526',
             border: '#808A93'
         }
     });
@@ -120,27 +114,27 @@ export default function useListing() {
 
 // Watcher for regionId
     watch(regionId, (newRegionId) => {
-        if (newRegionId.length === 0) {
+        if (!regionId) {
             fields.value.regionId.valid = false;
             fields.value.regionId.text = 'აირჩიეთ რეგიონი';
-            fields.value.regionId.color = '#021526';
+            fields.value.regionId.border = '#F93B1D'
         } else {
             fields.value.regionId.valid = true;
             fields.value.regionId.text = '';
-            fields.value.regionId.color = '#45A849';
+            fields.value.regionId.border = '#808A93'
         }
     });
 
 // Watcher for cityId
     watch(cityId, (newCityId) => {
-        if (newCityId.length === 0) {
+        if (!newCityId) {
             fields.value.cityId.valid = false;
             fields.value.cityId.text = 'აირჩიეთ ქალაქი';
-            fields.value.cityId.color = '#021526';
+            fields.value.cityId.border = '#F93B1D';
         } else {
             fields.value.cityId.valid = true;
             fields.value.cityId.text = '';
-            fields.value.cityId.color = '#45A849';
+            fields.value.cityId.border = '#808A93'
         }
     });
 
@@ -216,29 +210,16 @@ export default function useListing() {
         }
     });
 
-    // Watcher for picture
-    watch(picture, (newPicture) => {
-        if (newPicture.length === 0) {
-            fields.value.picture.valid = false;
-            fields.value.picture.text = 'ატვირთეთ სურათი';
-            fields.value.picture.color = '#021526';
-        } else {
-            fields.value.picture.valid = true;
-            fields.value.picture.text = '';
-            fields.value.picture.color = '#45A849';
-        }
-    });
-
 // Watcher for agent_id
     watch(agentId, (newAgentId) => {
-        if (newAgentId === 'აირჩიეთ აგენტი') {
+        if (!agentId) {
             fields.value.agentId.valid = false;
             fields.value.agentId.text = 'აირჩიეთ აგენტი';
-            fields.value.agentId.color = '#021526';
+            fields.value.regionId.border = '#F93B1D'
         } else {
             fields.value.agentId.valid = true;
             fields.value.agentId.text = '';
-            fields.value.agentId.color = '#45A849';
+            fields.value.agentId.border = '#808A93'
         }
     });
 
@@ -290,6 +271,8 @@ export default function useListing() {
                         'Content-Type': 'multipart/form-data',
                     }
                 });
+
+                await router.push('/');
 
                 fields.value.picture.text = 'განცხადება დაემატა წარმატებით!';
                 fields.value.picture.color = '#45A849';
