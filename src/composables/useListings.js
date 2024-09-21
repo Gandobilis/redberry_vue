@@ -1,10 +1,9 @@
-import axios from "../interceptors/axios/index.js";
-import {ref, provide} from "vue";
+import axios from "/src/interceptors/axios";
+import {ref} from "vue";
 
 export const useListings = () => {
     const listings = ref()
     const listing = ref()
-    provide('listings', listings)
 
     const getListings = async () => {
         try {
@@ -14,8 +13,6 @@ export const useListings = () => {
             console.log(error)
         }
     }
-
-    provide('getListings', getListings);
 
     const getListing = async (id) => {
         try {
@@ -35,6 +32,7 @@ export const useListings = () => {
     }
 
     return {
+        listings,
         listing,
         getListings,
         getListing,

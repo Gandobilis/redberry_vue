@@ -1,6 +1,5 @@
 <script setup>
 import HeaderComponent from "/src/components/HeaderComponent.vue";
-import FooterComponent from "/src/components/FooterComponent.vue";
 </script>
 
 <template>
@@ -8,5 +7,4 @@ import FooterComponent from "/src/components/FooterComponent.vue";
   <main class="px-[162px] py-[38px]">
     <slot/>
   </main>
-  <footer-component/>
 </template>

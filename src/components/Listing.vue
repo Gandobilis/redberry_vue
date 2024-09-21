@@ -10,12 +10,10 @@ import Bed from "../assets/icons/svg/bed.vue";
 import Zip from "../assets/icons/svg/zip.vue";
 import X from "../assets/icons/svg/x.vue";
 
-const {listing, getListing, deleteListing} = useListings()
+const {listing, listings, getListing, getListings, deleteListing} = useListings()
 
 const route = useRoute()
 const router = useRouter()
-const listings = inject('listings')
-const getListings = inject('getListings')
 
 const regionListings = ref([])
 

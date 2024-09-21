@@ -1,11 +1,13 @@
 <script setup>
 import {onMounted, ref, watch, inject} from "vue";
 import ListingCard from "./ListingCard.vue";
-import {useRoute} from "vue-router";
+import {useRoute, useRouter} from "vue-router";
+import {useListings} from "../composables/useListings.js";
 
-const listings = inject('listings');
-const getListings = inject('getListings')
+
+const {listings, getListings} = useListings()
 const route = useRoute()
+const router = useRouter()
 const query = ref({})
 const filteredListings = ref()
 
@@ -17,10 +19,6 @@ onMounted(async () => {
     applyFilters(nListings)
   })
 })
-
-import { useRouter } from 'vue-router'
-
-const router = useRouter()
 
 const goToListing = (id) => {
   router.push(`/listings/${id}`)
@@ -69,15 +67,11 @@ const applyFilters = (listings) => {
 
 <template>
   <div v-if="filteredListings" class="w-full grid grid-cols-4 gap-[20px] mt-[32px]">
-    <ListingCard v-for="listing in filteredListings" :key="listing.id" :listing="listing" @click="goToListing(listing.id)" />
+    <ListingCard v-for="listing in filteredListings" :key="listing.id" :listing="listing"
+                 @click="goToListing(listing.id)"/>
   </div>
 
-  <!--  <Carousel v-if="listings" class="mt-10" :listings="listings"/>-->
   <div v-else>
     <h1 class="text-sm">იტვირთება...</h1>
   </div>
 </template>
-
-<style scoped>
-
-</style>

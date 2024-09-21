@@ -1,12 +1,13 @@
 <script setup>
-import {inject, onMounted, ref, watch} from 'vue';
+import {onMounted, ref, watch} from 'vue';
 import {useRoute, useRouter} from 'vue-router';
 import X from "../../assets/icons/svg/x.vue";
+import {useRegions} from "../../composables/useRegions.js";
 
 const router = useRouter();
 const route = useRoute();
 
-const regions = inject('regions');
+const {regions, getRegionsAndCities} = useRegions()
 const checkedRegions = ref([]);
 const minPrice = ref('');
 const maxPrice = ref('');
@@ -35,7 +36,8 @@ const updateBedroomCount = () => {
   bedroomCount.value = route.query.bedroomCount ? route.query.bedroomCount : ''
 }
 
-onMounted(() => {
+onMounted(async () => {
+  await getRegionsAndCities();
   watch(regions, (nregions) => {
     const queryRegions = route.query.regions;
     if (queryRegions) {
@@ -60,8 +62,8 @@ const removeRegionTag = (id) => {
       .filter(r => r.id !== id)
       .map(r => r.id)
       .join(',');
-  const {regions,...query} = route.query
-  if(updatedRegions)
+  const {regions, ...query} = route.query
+  if (updatedRegions)
     router.push({query: {...route.query, regions: updatedRegions}});
   else
     router.push({query})

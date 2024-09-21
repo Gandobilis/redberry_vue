@@ -202,7 +202,7 @@ watch(agent, (newAgent) => {
 
       <div class="flex items-center gap-4 pt-14 justify-end">
         <router-link to="/"
-                class="flex items-center gap-1 rounded-lg px-4 py-2.5 border text-[#F93B1D] border-[#F93B1D] font-medium hover:bg-[#F93B1D] hover:text-white">
+                     class="flex items-center gap-1 rounded-lg px-4 py-2.5 border text-[#F93B1D] border-[#F93B1D] font-medium hover:bg-[#F93B1D] hover:text-white">
           გაუქმება
         </router-link>
 

@@ -1,5 +1,4 @@
 <script setup>
-
 import Location from "../assets/icons/svg/location.vue";
 import Bed from "../assets/icons/svg/bed.vue";
 import Area from "../assets/icons/svg/area.vue";
@@ -22,8 +21,6 @@ const {
   zip_code,
   is_rental
 } = props.listing
-
-
 </script>
 
 

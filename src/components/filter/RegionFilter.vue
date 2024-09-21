@@ -1,6 +1,7 @@
 <script setup>
-import {inject, onMounted, ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useRoute, useRouter} from "vue-router";
+import {useRegions} from "../../composables/useRegions.js";
 
 
 const props = defineProps({
@@ -10,8 +11,8 @@ const props = defineProps({
   }
 })
 
+const {regions, getRegionsAndCities} = useRegions()
 
-const regions = inject('regions');
 const router = useRouter();
 const route = useRoute();
 const checkedRegions = ref([]);
@@ -48,6 +49,9 @@ defineExpose({
 
 const isRegionChecked = (region) => checkedRegions.value.some(r => r.id === region.id);
 
+onMounted(async () => {
+  await getRegionsAndCities();
+})
 </script>
 
 <template>

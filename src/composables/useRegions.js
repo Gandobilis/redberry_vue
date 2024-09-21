@@ -1,11 +1,10 @@
-import axios from "../interceptors/axios/index.js";
-import {ref, watch,provide} from "vue";
+import axios from "/src/interceptors/axios";
+import {ref, watch} from "vue";
 
 
 
 export const useRegions = () => {
   const regions = ref()
-  provide('regions',regions)
   const cities = ref()
   const filteredCities = ref()
   const regionIds = ref([])
